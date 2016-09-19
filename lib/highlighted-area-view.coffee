@@ -110,7 +110,10 @@ class HighlightedAreaView
     regexSearch = result[0]
 
     if atom.config.get('highlight-selected.onlyHighlightWholeWords')
-      regexSearch =  "\\b" + regexSearch
+      if regexSearch.indexOf("\$") isnt -1
+        regexSearch = regexSearch.replace("\$", "\$\\b")
+      else
+        regexSearch =  "\\b" + regexSearch
       regexSearch = regexSearch + "\\b"
 
     @resultCount = 0
